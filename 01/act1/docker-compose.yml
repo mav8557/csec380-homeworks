@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+    web-server:
+        build: './serv'
+        ports:
+            - '9001:80' # forward port 9001 on host to port 80 on container

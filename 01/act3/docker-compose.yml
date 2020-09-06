@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  cache:
+    build: './cache-server'
+    ports:
+      - '80:8080'
+
+  web-server1:
+    build: './serv1'
+
+  web-server2:
+    build: './serv2'
+
+  load-balancer:
+    build: './lb'

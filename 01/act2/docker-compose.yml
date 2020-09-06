@@ -5,11 +5,9 @@ services:
         build: './cache-server'
         ports:
             - '80:8080'
-        depends_on: 
+        depends_on:
             - web-server
     web-server:
         build: './web-server'
-        ports:
-            - '9001:80'
         volumes:
             - './web-server/src/:/usr/share/nginx/html'

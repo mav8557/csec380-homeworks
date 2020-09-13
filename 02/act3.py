@@ -11,7 +11,7 @@ token = req.request().split("is: ")[-1][:-1]
 
 print("TOKEN:", token)
 
-sleep(.5)
+#sleep(.5)
 print("POST 2: RETRIEVING CAPTCHA!")
 req2 = SimpleHTTPRequest(method="POST", resource="/getFlag3Challenge", body=f"token={token}")
 

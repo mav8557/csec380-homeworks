@@ -69,31 +69,39 @@ class SimpleHTTPRequest:
             self.fullreq += f"User-Agent: {self.useragent}\r\n"
             # accept header
             self.fullreq += f"Accept: */*\r\n"
-            self.fullreq += f"Vary: Accept-Encoding\r\n"
+            #self.fullreq += f"Vary: Accept-Encoding\r\n"
             #self.fullreq += f"Accept-Encoding: gzip, deflate\r\n"
+
+            # language
+            self.fullreq += f"Accept-Language: en-us\r\n"
+
+            # encoding
+            self.fullreq += f"Accept-Encoding: text/html\r\n"
+
             # content-type
             self.fullreq += f"Content-Type: {self.content_type}\r\n"
             # content-length
             if len(self.body) > 0:
-                  if self.body.count('&') > 1:
-                        self.fullreq += f"Content-Length: {len(urllib.parse.quote_plus(self.body))}\r\n"
-                  else:
-                        self.fullreq += f"Content-Length: {len(self.body)}\r\n"
+                  # if self.body.count('&') > 1:
+                  #       self.fullreq += f"Content-Length: {len(urllib.parse.quote_plus(self.body))}\r\n"
+                  # else:
+                  self.fullreq += f"Content-Length: {len(self.body)}\r\n"
 
 
             # set up other headers
-            for header, value in self.headers.items():
-                  self.fullreq += f"{header}: {value}\r\n"
+            # FIXME self.headers is empty after adding headers, for some reason
+            # print("ITEMS!", self.headers)
+            # for header, value in self.headers.items():
+            #       print(f"Adding header {header}")
+            #       self.fullreq += f"{header}: {value}\r\n"
 
             self.fullreq += "\r\n"
             # set up body
             if len(self.body) > 0:
-                  if self.body.count('&') > 1:
-                        self.fullreq += f"{urllib.parse.quote_plus(self.body)}\r\n"
-                  else:
-                        self.fullreq += f"{self.body}\r\n"
-
-
+                  # if self.body.count('&') > 1:
+                  #       self.fullreq += f"{urllib.parse.quote_plus(self.body)}\r\n"
+                  # else:
+                  self.fullreq += f"{self.body}\r\n"
                   
             self.fullreq += "\r\n"
 
@@ -102,8 +110,3 @@ class SimpleHTTPRequest:
             print(repr(self.fullreq))
             print()
             print(self.fullreq)
-
-if __name__ == "__main__":
-      req = SimpleHTTPRequest(method="POST")
-      req.render()
-      print(req.request())

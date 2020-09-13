@@ -6,7 +6,8 @@ req = SimpleHTTPRequest(method="POST", resource="/getSecure")
 
 token = req.request().split("is: ")[-1][:-1]
 
-req2 = SimpleHTTPRequest(method="POST", resource="/getFlag2")
-req2.add_param('token', token)
+req2 = SimpleHTTPRequest(method="POST", resource="/getFlag2", body=f"token={token}")
 
 flag = req2.request().split("is ")[-1][:-1]
+
+print(flag)

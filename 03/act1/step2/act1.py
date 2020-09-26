@@ -32,26 +32,38 @@ for tag in img:
 # print()
 # print(url)
 
-os.mkdir("./staff")
+try:
+    os.mkdir("./staff")
+except FileExistsError: # apparently its own exception in python?
+    pass # squash
+
+
 i = 0
+requests = []
 for url in imglinks:
     parsed = SimpleHTTPRequest.urlparser(url)
 
-    print(parsed)
+    #print(parsed)
     newresource = "/" + "/".join(parsed["resource"])
-    #newresource = SimpleHTTPRequest.encodeurl("/" + "/".join(parsed["resource"]))
-    print(newresource)
+    #print(newresource)
 
-    print(parsed["hostname"], newresource)
-
+    #print(parsed["hostname"], newresource)
+    fname = f"./staff/{i}.png"
     req2 = SimpleHTTPRequest(
         method="GET",
         hostname=parsed["hostname"],
-        resource=newresource
+        resource=newresource,
+        filename=fname,
+        mode="wb"
     )
 
-    req2.request(filename=f"./staff/{i}.png", mode="wb")
+    #print("FUCKING SHIT!", req2.filename)
+
+    requests.append(req2)
+
+    #req2.request()
     i+=1
 
-#print(len(req2.resp))
-#print(req2.resp)
+    
+
+SimpleHTTPRequest.create_run_thread_group(requests)

@@ -2,6 +2,8 @@ import socket
 import ssl
 import urllib.parse
 from pprint import pprint
+from typing import List
+import threading
 
 class SimpleHTTPRequest:
       def __init__(
@@ -15,7 +17,9 @@ class SimpleHTTPRequest:
                   hostname="www.rit.edu",
                   https=True,
                   url="",
-                  body=''
+                  body='',
+                  filename=None,
+                  mode=None
       ):
             self.method = method
             #self.hostname = url.split("/")[2]
@@ -27,6 +31,8 @@ class SimpleHTTPRequest:
             self.url = url
             self.headers = {}
             self.https = https
+            self.filename = filename # optional filename to save to
+            self.mode = mode         # mode to write file in
             self.body = body # tokens, stuff like that
             self.fullreq = "" # the full request to be sent
             self.resp = None # respose is None until we recv from the server
@@ -83,7 +89,7 @@ class SimpleHTTPRequest:
             """
             self.body[param] = value
 
-      def request(self, filename=None, mode=None):
+      def request(self):
             """
             Send our request to the server, and return the full response
             """
@@ -126,22 +132,25 @@ class SimpleHTTPRequest:
                   self.respheadersdict[s[0].strip()] = s[1].strip()
                   # if self.respheadersdict.get("Content-Length", None) is not None:
                   #       self.respheadersdict["Content-Length"] = int(self.respheadersdict["Content-Length"].decode().strip())
-            print(self.respheadersdict)
+            #print(self.respheadersdict)
 
             if self.respheadersdict["status_code"] in {301, 302}:
                   # follow redirect
                   newpath = self.resource.split("/")
-                  print(newpath[1:len(newpath)-1])
+                  #print(newpath[1:len(newpath)-1])
                   finalpath = "/" + "/".join(newpath[1:len(newpath)-1]) + "/" + self.respheadersdict["Location"]
                   #print("NEW RESOURCE:", finalpath)
                   self.resource = finalpath
                   self.request()
-                  pass
-
-            if filename is not None and mode is not None and len(self.respbody) > 0:
-                  with open(filename, mode) as f:
+                  
+            
+            # print(len(self.respbody))
+            # print("ATTEMPTING TO DOWNLOAD:", self.filename, self.mode)
+            # print("ATTEMPTING TO DOWNLOAD:", self.filename, self.mode)
+            if self.filename is not None and self.mode is not None and len(self.respbody) > 0:
+                  with open(self.filename, self.mode) as f:
                         f.write(self.respbody)
-                  print(filename, "saved!")
+                  #print(self.filename, "saved!")
 
             return resp
 
@@ -201,6 +210,28 @@ class SimpleHTTPRequest:
 
            
             print("[+] Rendered request...")
-            print(repr(self.fullreq))
+            #print(repr(self.fullreq))
             print()
             print(self.fullreq)
+
+
+      @staticmethod
+      def create_run_thread_group(requests: List):
+            """
+            Convert a list of requests to threads and run each thread.
+            
+            :param: requests is a list of SimpleHTTPRequest objects
+            """
+
+            # convert to threads
+            threads = [threading.Thread(target=req.request) for req in requests]
+            #threads = [threading.Thread(target=req.request, kwargs={"filename": req.filename, "mode": req.mode}) for req in requests[:1]]
+            #pprint(threads)
+            for thread in threads:
+                  thread.start()
+                  #print("Waiting...")
+                  #thread.join()
+           
+
+            for thread in threads:
+                  thread.join()

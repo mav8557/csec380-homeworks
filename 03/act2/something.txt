@@ -1,0 +1,14 @@
+Thread: {} {} [('https://www.rit.edu/', 0)] rit.edu
+HERE
+[]
+https://www.rit.edu/ 0
+[+] Rendered request...
+
+GET / HTTP/1.1
+Host: www.rit.edu
+User-Agent: richardgill
+Accept: */*
+
+
+
+HERE

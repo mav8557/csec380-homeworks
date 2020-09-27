@@ -454,8 +454,8 @@ def worker_entrypoint(emails: dict, visited_links: dict, queued_links: queue.Que
             #       continue
 
             # if depth is greater than 4, don't scan
-            if depth > 4:
-                  continue
+            # if depth > 4:
+            #       continue
             
             # ensure we haven't already been here before
             if link in visited_links:
@@ -512,7 +512,7 @@ def worker_entrypoint(emails: dict, visited_links: dict, queued_links: queue.Que
                   if p.scheme.startswith("http") and p.netloc.endswith("rit.edu"):
                         #print(href, p)
                         if href not in visited_links:
-                              if href.endswith(".pdf") or "#" in href or depth+1 > 3:
+                              if depth+1 > 4 or href.endswith(".pdf") or "#" in href or href.count("/") > 6:
                                     # we don't want to go here
                                     visited_links[href] = True
                                     continue
@@ -524,7 +524,7 @@ def worker_entrypoint(emails: dict, visited_links: dict, queued_links: queue.Que
                         url = secure + hostname + newpath
                         url = url.rstrip("/")
                         #print("UNDER CONSIDERATION:", url)
-                        if url.endswith(".pdf") or "#" in url or depth+1 > 3:
+                        if depth+1 > 4 or url.endswith(".pdf") or "#" in url or url.count("/") > 6:
                               # we don't want to go here
                               visited_links[url] = True
                               continue

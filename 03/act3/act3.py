@@ -9,8 +9,8 @@ import queue
 try:
     open("something.txt")
 except FileNotFoundError:
-    links = [x.split(",")[1].strip() for x in open("companies.csv").readlines()][:25]
-
+    links = [x.split(",")[1].strip() for x in open("companies.csv").readlines()][40:45]
+    #links = ["http://www.kohls.com", "http://www.aflac.com"]
     man = Manager()
 
     visited_links = man.dict()
@@ -55,7 +55,7 @@ with open("something.txt", "r") as f:
                 paths.add(part + "/")
             paths.add(p[-1])
 
-with open("paths.list", "w") as f:
+with open("paths.list", "a+") as f:
     for path in paths:
         f.write(path + "\n")
 

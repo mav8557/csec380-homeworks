@@ -57,13 +57,10 @@ for url in imglinks:
         mode="wb"
     )
 
-    #print("FUCKING SHIT!", req2.filename)
-
     requests.append(req2)
 
     #req2.request()
     i+=1
-
     
 
 SimpleHTTPRequest.create_run_thread_group(requests)

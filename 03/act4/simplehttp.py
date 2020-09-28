@@ -118,7 +118,7 @@ class SimpleHTTPRequest:
                   # wrap encryption around socket if using https
                   self.sock = ssl.wrap_socket(self.sock, ssl_version=ssl.PROTOCOL_TLS)
             
-            self.sock.settimeout(10)
+            self.sock.settimeout(5)
 
             try:
                   self.sock.connect((self.hostname, self.port))
@@ -374,46 +374,44 @@ def crawl(start: str, domain: str, procs=6):
       for proc in proclist:
             proc.join()
 
-      return visited_links
-
-      # depth0 = StringIO()
-      # depth1 = StringIO()
-      # depth2 = StringIO()
-      # depth3 = StringIO()
-      # depth4 = StringIO()
+      depth0 = StringIO()
+      depth1 = StringIO()
+      depth2 = StringIO()
+      depth3 = StringIO()
+      depth4 = StringIO()
 
       
-      # for email, depth in emails.items():
-      #       if depth == 0:
-      #             depth0.write(email + "\n")
-      #       elif depth == 1:
-      #             depth1.write(email + "\n")
-      #       elif depth == 2:
-      #             depth2.write(email + "\n")
-      #       elif depth == 3:
-      #             depth3.write(email + "\n")
-      #       elif depth == 4:
-      #             depth4.write(email + "\n")
+      for email, depth in emails.items():
+            if depth == 0:
+                  depth0.write(email + "\n")
+            elif depth == 1:
+                  depth1.write(email + "\n")
+            elif depth == 2:
+                  depth2.write(email + "\n")
+            elif depth == 3:
+                  depth3.write(email + "\n")
+            elif depth == 4:
+                  depth4.write(email + "\n")
       
-      # d0fd = open("depth0.txt", "w")
-      # d1fd = open("depth1.txt", "w")
-      # d2fd = open("depth2.txt", "w")
-      # d3fd = open("depth3.txt", "w")
-      # d4fd = open('depth4.txt', "w")
+      d0fd = open("depth0.txt", "w")
+      d1fd = open("depth1.txt", "w")
+      d2fd = open("depth2.txt", "w")
+      d3fd = open("depth3.txt", "w")
+      d4fd = open('depth4.txt', "w")
 
-      # d0fd.write(depth0.getvalue())
-      # d1fd.write(depth1.getvalue())
-      # d2fd.write(depth2.getvalue())
-      # d3fd.write(depth3.getvalue())
-      # d4fd.write(depth4.getvalue())
+      d0fd.write(depth0.getvalue())
+      d1fd.write(depth1.getvalue())
+      d2fd.write(depth2.getvalue())
+      d3fd.write(depth3.getvalue())
+      d4fd.write(depth4.getvalue())
 
-      # d0fd.close()
-      # d1fd.close()
-      # d2fd.close()
-      # d3fd.close()
-      # d4fd.close()
+      d0fd.close()
+      d1fd.close()
+      d2fd.close()
+      d3fd.close()
+      d4fd.close()
       
-      # print("\n\n\n\nEmails counted:", len(emails))
+      print("\n\n\n\nEmails counted:", len(emails))
 
 def worker_entrypoint(emails: dict, visited_links: dict, queued_links: queue.Queue, domain: str, proc: int):
       """
@@ -502,7 +500,7 @@ def worker_entrypoint(emails: dict, visited_links: dict, queued_links: queue.Que
 
             # grab all emails from the page
             #print(f"THREAD {proc}: waits: {waitcounter} || emails: {len(emails)} ||  Searching Emails!")
-            #find_emails(r.respbody, emails, depth)
+            find_emails(r.respbody, emails, depth)
 
             # grab all links and add them to queue with higher depth
             #print(f"THREAD {proc}: waits: {waitcounter} || emails: {len(emails)} ||  Grabbing HREFs!")
@@ -511,7 +509,7 @@ def worker_entrypoint(emails: dict, visited_links: dict, queued_links: queue.Que
                   href = link["href"].rstrip("/")
                   p = up(href)
                   #print("PATH:", p.path)
-                  if p.scheme.startswith("http"):
+                  if p.scheme.startswith("http") and p.netloc.endswith("rit.edu"):
                         #print(href, p)
                         if href not in visited_links:
                               if depth+1 > 4 or href.endswith(".pdf") or "#" in href or href.count("/") > 6:
@@ -521,7 +519,7 @@ def worker_entrypoint(emails: dict, visited_links: dict, queued_links: queue.Que
                               queued_links.put((href, depth+1))
                   elif len(p.path) > 0 and p.path[0] == "/" and "#" not in p.path:
                         newpath = p.path
-                        hostname = parsed.netloc
+                        hostname = domain
                         secure = "https://" if r.https else "http://"
                         url = secure + hostname + newpath
                         url = url.rstrip("/")

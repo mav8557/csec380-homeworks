@@ -3,6 +3,7 @@ from simplehttp import SimpleHTTPRequest
 from pprint import pprint
 import bs4
 from unicodedata import normalize
+import os
 
 
 req = SimpleHTTPRequest(
@@ -35,8 +36,10 @@ for c in courses:
         if len(title) > 6:
             coursetitles[title.strip()] = fulltitle.strip()
 
+if not os.path.exists("./ih8docker"):
+    os.mkdir("./ih8docker")
 
-with open("courses.csv", "w") as fd:
+with open("./ih8docker/courses.csv", "w") as fd:
     for key, value in coursetitles.items():
         fd.write(f"{key},{value}\n")
 

@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup
 import re # not using bs4 for emails, nope
 import queue
 from io import StringIO
+import os
 
 """
 Notes:
@@ -393,6 +394,9 @@ def crawl(start: str, domain: str, procs=6):
             elif depth == 4:
                   depth4.write(email + "\n")
       
+      for email in emails:
+            print(email)
+
       d0fd = open("depth0.txt", "w")
       d1fd = open("depth1.txt", "w")
       d2fd = open("depth2.txt", "w")

@@ -529,8 +529,9 @@ def worker_entrypoint(emails: dict, visited_links: dict, queued_links: queue.Que
                         url = url.rstrip("/")
                         #print("UNDER CONSIDERATION:", url)
                         if depth+1 > 4 or url.endswith(".pdf") or "#" in url or url.count("/") > 6:
-                              # we don't want to go here
-                              visited_links[url] = True
+                              # we don't want to go here. don't add to visited or it gets caught up for act3
+                              # which finds paths. specific PDFs don't make good general paths to search for
+                              #visited_links[url] = True
                               continue
                         if url not in visited_links:
                               queued_links.put((url, depth+1))

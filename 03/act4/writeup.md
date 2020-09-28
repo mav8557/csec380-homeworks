@@ -16,4 +16,4 @@ Response codes can be very efficient as they can tell a lot without having to re
 
 ## Are there any common naming patterns that you might expect would yield positive results?
 
-Yes. robots.txt shows anything that should not be indexed by search engines, which could contain links to sensitive or relevant information. /admin, /auth, /backup{,s}, and /.git could leak sensitive information. /.well-known could show metadata and other information about the server that could give other indicators to search as well.
+Yes. robots.txt shows anything that should not be indexed by search engines, which could contain links to sensitive or relevant information. /admin, /auth, /backup{,s}, and /.git could leak sensitive information. /.well-known could show metadata and other information about the server that could give other indicators to search as well. What we saw, business and articles, are also good patterns to consider for brute-forcing.

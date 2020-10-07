@@ -9,7 +9,7 @@ import queue
 try:
     open("something.txt")
 except FileNotFoundError:
-    links = [x.split(",")[1].strip() for x in open("companies.csv").readlines()][40:45]
+    links = [x.split(",")[1].strip() for x in open("companies.csv").readlines()][:25]
     #links = ["http://www.kohls.com", "http://www.aflac.com"]
     man = Manager()
 

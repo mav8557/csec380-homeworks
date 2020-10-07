@@ -1,0 +1,5 @@
+http://www.manpowergroup.com/,True
+http://www.penskeautomotive.com/,True
+http://www.kohls.com/,True
+http://starbucks.com,True
+http://www.paccar.com/,True

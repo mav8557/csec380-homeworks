@@ -397,11 +397,16 @@ def crawl(start: str, domain: str, procs=6):
       for email in emails:
             print(email)
 
-      d0fd = open("depth0.txt", "w")
-      d1fd = open("depth1.txt", "w")
-      d2fd = open("depth2.txt", "w")
-      d3fd = open("depth3.txt", "w")
-      d4fd = open('depth4.txt', "w")
+      try:
+            os.mkdir("/tmp/outdir")
+      except FileExistsError:
+            pass
+
+      d0fd = open("/tmp/outdir/depth0.txt", "w")
+      d1fd = open("/tmp/outdir/depth1.txt", "w")
+      d2fd = open("/tmp/outdir/depth2.txt", "w")
+      d3fd = open("/tmp/outdir/depth3.txt", "w")
+      d4fd = open('/tmp/outdir/depth4.txt', "w")
 
       d0fd.write(depth0.getvalue())
       d1fd.write(depth1.getvalue())

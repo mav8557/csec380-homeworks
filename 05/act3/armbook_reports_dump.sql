@@ -173,7 +173,7 @@ CREATE TABLE `reports` (
   `id` int NOT NULL AUTO_INCREMENT,
   `info` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,6 +182,7 @@ CREATE TABLE `reports` (
 
 LOCK TABLES `reports` WRITE;
 /*!40000 ALTER TABLE `reports` DISABLE KEYS */;
+INSERT INTO `reports` VALUES (1,'{\"csp-report\":{\"blocked-uri\":\"inline\",\"column-number\":7,\"document-uri\":\"https://localhost/index.php\",\"line-number\":4743,\"original-policy\":\"script-src \'self\' \'unsafe-eval\' https://ajax.googleapis.com https://cdnjs.cloudflare.com \'sha256-gPw5gUrvpqmorpsk/vK0J7rL4r5AizwCloQ+8XSvBeI=\' \'sha256-JI59v1z8xbSoiL9j7b8h77noskmircJMmC964xiJI5M=\' \'sha256-kkV0BxQXIVBOZljKnCMO9s7x6z4Yt4I6QYuU+0MJXUM=\' \'sha256-0HWhZSb6EKYMOAZcf1sLermUb2hR932MCTFHzGkkuEk=\' \'sha256-M2+g/jWkve+sOerGclc9DkFpVsybV0lmhbajMUUSuaw=\' \'sha256-rvB/M+LH7OD002YeFLvNZorWrW7ImwZaZp3jVZV6oCA=\' \'sha256-tX3rTpPm7w1QIA3ZbFqX9fLKFmOsRgn+AyXM/PzUbNo=\' \'sha256-ICD7mA3BVM9uNUh1867cJ8LQoDniM4ItzctGdB5GhS0=\' \'sha256-9gkpZMPmmZ1T1gJzHhB29ioaYlZkR/i/cjT2P45M82A=\'; font-src \'self\' https://fonts.gstatic.com; connect-src \'self\'; child-src \'self\'; img-src *; default-src \'self\'; style-src * \'unsafe-inline\'; form-action \'self\'; frame-ancestors \'none\'; upgrade-insecure-requests; report-uri https://localhost/report.php\",\"referrer\":\"https://localhost/home.php\",\"source-file\":\"https://localhost/js/jquery.js\",\"violated-directive\":\"script-src\"}}'),(2,'{\"csp-report\":{\"blocked-uri\":\"inline\",\"column-number\":7,\"document-uri\":\"https://localhost/home.php\",\"line-number\":4743,\"original-policy\":\"script-src \'self\' \'unsafe-eval\' https://ajax.googleapis.com https://cdnjs.cloudflare.com \'sha256-gPw5gUrvpqmorpsk/vK0J7rL4r5AizwCloQ+8XSvBeI=\' \'sha256-JI59v1z8xbSoiL9j7b8h77noskmircJMmC964xiJI5M=\' \'sha256-kkV0BxQXIVBOZljKnCMO9s7x6z4Yt4I6QYuU+0MJXUM=\' \'sha256-0HWhZSb6EKYMOAZcf1sLermUb2hR932MCTFHzGkkuEk=\' \'sha256-M2+g/jWkve+sOerGclc9DkFpVsybV0lmhbajMUUSuaw=\' \'sha256-rvB/M+LH7OD002YeFLvNZorWrW7ImwZaZp3jVZV6oCA=\' \'sha256-tX3rTpPm7w1QIA3ZbFqX9fLKFmOsRgn+AyXM/PzUbNo=\' \'sha256-ICD7mA3BVM9uNUh1867cJ8LQoDniM4ItzctGdB5GhS0=\' \'sha256-9gkpZMPmmZ1T1gJzHhB29ioaYlZkR/i/cjT2P45M82A=\'; font-src \'self\' https://fonts.gstatic.com; connect-src \'self\'; child-src \'self\'; img-src *; default-src \'self\'; style-src * \'unsafe-inline\'; form-action \'self\'; frame-ancestors \'none\'; upgrade-insecure-requests; report-uri https://localhost/report.php\",\"referrer\":\"https://localhost/index.php\",\"source-file\":\"https://localhost/js/jquery.js\",\"violated-directive\":\"script-src\"}}'),(3,''),(4,'{\"csp-report\":{\"blocked-uri\":\"inline\",\"column-number\":7,\"document-uri\":\"https://localhost/home.php\",\"line-number\":4743,\"original-policy\":\"script-src \'self\' \'unsafe-eval\' https://ajax.googleapis.com https://cdnjs.cloudflare.com \'sha256-gPw5gUrvpqmorpsk/vK0J7rL4r5AizwCloQ+8XSvBeI=\' \'sha256-JI59v1z8xbSoiL9j7b8h77noskmircJMmC964xiJI5M=\' \'sha256-kkV0BxQXIVBOZljKnCMO9s7x6z4Yt4I6QYuU+0MJXUM=\' \'sha256-0HWhZSb6EKYMOAZcf1sLermUb2hR932MCTFHzGkkuEk=\' \'sha256-M2+g/jWkve+sOerGclc9DkFpVsybV0lmhbajMUUSuaw=\' \'sha256-rvB/M+LH7OD002YeFLvNZorWrW7ImwZaZp3jVZV6oCA=\' \'sha256-tX3rTpPm7w1QIA3ZbFqX9fLKFmOsRgn+AyXM/PzUbNo=\' \'sha256-ICD7mA3BVM9uNUh1867cJ8LQoDniM4ItzctGdB5GhS0=\' \'sha256-9gkpZMPmmZ1T1gJzHhB29ioaYlZkR/i/cjT2P45M82A=\'; font-src \'self\' https://fonts.gstatic.com; connect-src \'self\'; child-src \'self\'; img-src *; default-src \'self\'; style-src * \'unsafe-inline\'; form-action \'self\'; frame-ancestors \'none\'; upgrade-insecure-requests; report-uri https://localhost/report.php\",\"referrer\":\"\",\"source-file\":\"https://localhost/js/jquery.js\",\"violated-directive\":\"script-src\"}}');
 /*!40000 ALTER TABLE `reports` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -250,4 +251,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-25 23:04:11
+-- Dump completed on 2020-10-25 23:33:23

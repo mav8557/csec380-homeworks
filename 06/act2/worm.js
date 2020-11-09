@@ -40,4 +40,3 @@ function infect(id, name) {
         }
     });
 }
-

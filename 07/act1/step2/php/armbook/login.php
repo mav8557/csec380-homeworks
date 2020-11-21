@@ -2,7 +2,8 @@
 ini_set("request_order", "GPC");
 $email = $_POST['email'];
 $password = $_POST['password'];
-$session = htmlentities($_REQUEST['ARM_SESSION']);
+// Don't accept over GET requests.
+// $session = htmlentities($_REQUEST['ARM_SESSION']);
 include_once("common.php");
 if($stmt = $mysqli->prepare("SELECT password, user_id from users where email=?")){
 	if($stmt->bind_param("s", $email)){
@@ -18,6 +19,7 @@ if($stmt = $mysqli->prepare("SELECT password, user_id from users where email=?")
 			if($password === $row['password']){
 				$active = 1;
 				$timeNow = time();
+				$session = substr(md5(time()), 0, 22);
 				if($stmt = $mysqli->prepare("UPDATE sessions SET session_id=?, ip=?, born=?, valid=? where user_id=?")){
 					if($stmt->bind_param("ssiis",$session, $_SERVER['REMOTE_ADDR'],$timeNow,$active,$row['user_id'])){
 						if(!$stmt->execute()){
@@ -27,7 +29,8 @@ if($stmt = $mysqli->prepare("SELECT password, user_id from users where email=?")
 						die("Error - Issue binding prepared statement: " . mysqli_error($mysqli));
 					}
 					if($stmt->close()){
-						setcookie("ARM_SESSION", $session, time()+3600);
+						// install cookie as httpOnly
+						setcookie("ARM_SESSION", $session, time()+3600, "", "", TRUE, TRUE);
 						die("True - login successful");
 					}else{
 						die("Error - Failed to close prepared statement" . mysqli_error($mysqli));

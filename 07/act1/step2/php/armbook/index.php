@@ -79,7 +79,8 @@ if(isset($_SESSION['login'])){
 <input type="text" id="email" name="email" />
 </td><td>
 <input type="password" id="password" name="password" />
-<input type="hidden" id="session_id" name="ARM_SESSION" value="<?php if(!isset($_REQUEST["ARM_SESSION"])){echo substr(md5(time()),0,22);}else{echo htmlentities($_REQUEST["ARM_SESSION"]);} ?>" />
+<!-- STEP 1: don't store create the session token here, and don't use the md5 of the current time either -->
+<!-- <input type="hidden" id="session_id" name="ARM_SESSION" value="<?php if(!isset($_REQUEST["ARM_SESSION"])){echo substr(md5(time()),0,22);}else{echo htmlentities($_REQUEST["ARM_SESSION"]);} ?>" /> -->
 </td><td>
 <input type="submit" name="submit" value="login" />
 </td></tr>

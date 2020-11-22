@@ -2,8 +2,8 @@
 ini_set("request_order", "GPC");
 include_once("common.php");
 $has_session = false;
-if(isset($_REQUEST["ARM_SESSION"])){
-	$session_id = $_REQUEST["ARM_SESSION"];
+if(isset($_COOKIE["ARM_SESSION"])){
+	$session_id = $_COOKIE["ARM_SESSION"];
 	// Get Data
 	if($stmt = $mysqli->prepare("SELECT * from sessions where session_id=?")){
 		if($stmt->bind_param("s", $session_id)){
